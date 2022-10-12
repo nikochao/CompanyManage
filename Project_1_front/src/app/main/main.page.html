@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>人事介面</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="center, peoplelist" > 
+    <ion-grid >
+      <ion-list  *ngFor="let item of peopleList"  [inset]="true">
+        <ion-item>
+          <ion-col size="3">
+            {{item.name}}
+          </ion-col>
+          <ion-col size="6">
+            {{item.depart_id}}
+          </ion-col>
+      
+          <ion-col>
+            <ion-button style="color:black" (click)="edit(item)">修改</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button style="color:red" (click)="delete(item)">刪除</ion-button>
+          </ion-col>
+        </ion-item>
+      </ion-list>
+    </ion-grid>
+    <ion-button (click)="getPeople()">全部的人</ion-button>
+    <ion-button (click)="new()">新增</ion-button>
+    <ion-button (click)="department_one()">部門一</ion-button>
+    <ion-button (click)="department_two()">部門二</ion-button>
+    
+
+  </div>
+ 
+  <!-- <ion-list  *ngFor="let item of peopleList" >
+    <ion-item-sliding>
+      <ion-item>
+        <ion-button class="button button-clear button-positive" (click)="getPersonId(item)"> {{item.name}}</ion-button>
+      </ion-item>
+      <ion-item-options>
+       <button style="color:red" (click)="delete(item)">刪除</button>
+      </ion-item-options>
+    </ion-item-sliding>
+    
+  </ion-list> -->
+  
+</ion-content>
