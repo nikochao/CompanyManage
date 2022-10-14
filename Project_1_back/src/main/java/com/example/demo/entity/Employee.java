@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -20,8 +22,9 @@ public class Employee {
     @Column(name = "employee_name")
     String name;
 
-    @Column(name = "employee_depart")
-    Integer depart_id;
+    @ManyToOne
+    @JoinColumn(name = "employee_depart")
+    private Department department;
 
     
     public Integer getId() {
@@ -40,16 +43,18 @@ public class Employee {
         this.name = name;
     }
 
-    public Integer getDepart_id() {
-        return depart_id;
-    }
-
-    public void setDepart_id(Integer depart_id) {
-        this.depart_id = depart_id;
-    }
+    
 
     public Employee(){
 
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     

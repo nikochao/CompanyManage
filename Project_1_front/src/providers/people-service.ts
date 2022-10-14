@@ -24,7 +24,7 @@ export class PeopleService {
     return this.http.delete<PeopleModal>(`${this.mainUrl}/employee/${id}`);
   }
   getDepartmentEmployee(id:string): Observable<PeopleModal[]> {
-    return this.http.get<PeopleModal[]>(`${this.mainUrl}/department/${id}`);
+    return this.http.get<PeopleModal[]>(`${this.mainUrl}/employeedepartment/${id}`);
   }
   
 }

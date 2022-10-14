@@ -1,5 +1,6 @@
+import { DepartmentModal } from './DepartmentModal';
 export interface PeopleModal {
     id: string
     name: string,
-    depart_id: string,
+    department:DepartmentModal
 }

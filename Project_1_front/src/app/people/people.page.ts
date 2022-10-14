@@ -14,7 +14,7 @@ export class PeoplePage implements OnInit {
   peopleList:PeopleModal[]=[];
   selectedPeople!: PeopleModal;
   constructor(public peopleService:PeopleService , public test:ActivatedRoute, public router:Router){
-
+    console.log(this.selectedPeople);
   }
 
   ngOnInit():void{

@@ -7,28 +7,47 @@
 <ion-content>
   <div class="center, peoplelist" > 
     <ion-grid >
-      <ion-list  *ngFor="let item of peopleList"  [inset]="true">
+      <ion-list *ngFor="let item of peopleList"  [inset]="true">
         <ion-item>
           <ion-col size="3">
             {{item.name}}
           </ion-col>
-          <ion-col size="6">
-            {{item.depart_id}}
+          <ion-col size="4" >
+            {{item.department.name}}
           </ion-col>
       
           <ion-col>
-            <ion-button style="color:black" (click)="edit(item)">修改</ion-button>
+            <ion-button style="color:blue" (click)="edit(item)" shape="round" fill="outline">修改</ion-button>
           </ion-col>
           <ion-col>
-            <ion-button style="color:red" (click)="delete(item)">刪除</ion-button>
+            <ion-button style="color:red" (click)="delete(item)" shape="round" fill="outline" color="danger">刪除</ion-button>
           </ion-col>
         </ion-item>
       </ion-list>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="transfer_to_home()"  shape="round" fill="outline" color="medium">新增</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="CreateDepartment()"  shape="round" fill="outline" color="medium">新增部門</ion-button>
+        </ion-col>
+      </ion-row>
+        <!-- <ion-col>
+          <ion-button (click)="getPeople()"  shape="round" fill="outline" color="dark">全部的人</ion-button>
+        </ion-col> -->
+        <ion-row  style="margin:auto; " >
+          <ion-col  style="margin : auto;">
+            目前部門:
+          </ion-col>
+          <ion-col style="margin-left : 0;">
+            <ion-select  [(ngModel)]="option" (ngModelChange)="department_filter()" shape="round" interface="popover" placeholder="選擇部門">
+              <ion-select-option value="all" >全部的人</ion-select-option>
+              <ion-select-option  *ngFor="let item of departmentList" value="{{item.id}}">{{item.name}}</ion-select-option>
+            </ion-select>
+          </ion-col>
+          
+        </ion-row>
     </ion-grid>
-    <ion-button (click)="getPeople()">全部的人</ion-button>
-    <ion-button (click)="new()">新增</ion-button>
-    <ion-button (click)="department_one()">部門一</ion-button>
-    <ion-button (click)="department_two()">部門二</ion-button>
     
 
   </div>

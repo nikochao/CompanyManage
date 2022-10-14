@@ -1,10 +1,13 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
-
+import com.example.demo.entity.Department;
 import com.example.demo.entity.Employee;
 import com.example.demo.entity.EmployeeRepository;
+import com.example.demo.modal.vo.DepartmentVO;
+import com.example.demo.modal.vo.EmployeeVO;
 import com.example.demo.modal.vo.ResponseResultVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,7 @@ public class EmployeeCTR {
 
     @PostMapping("/employee")
     public ResponseEntity<?> createEmployee(@RequestBody Employee employee){
+        System.out.println(employee.getDepartment());
         employeeRepository.save(employee);
         ResponseResultVO responseResultVO = new ResponseResultVO();
         responseResultVO.setResultMessage("Create Completely");
@@ -53,20 +57,66 @@ public class EmployeeCTR {
     }
 
     @GetMapping("/employee/{id}")
-    public Employee findEmployee(@PathVariable("id") Integer employeeId){
-        Employee employee= employeeRepository.findById(employeeId).orElse(null);
-        return employee;
+    public EmployeeVO findEmployee(@PathVariable("id") Integer employeeId){
+        Employee data= employeeRepository.findById(employeeId).orElse(null);
+        EmployeeVO result = new EmployeeVO();
+        result.setId(data.getId());
+        result.setName(data.getName());
+
+        Department eItem=data.getDepartment();
+        DepartmentVO departmentvo = new DepartmentVO();
+        departmentvo.setId(eItem.getId());
+        departmentvo.setName(eItem.getName());
+
+        result.setDepartment(departmentvo);
+        
+        return result;
     }
 
     @GetMapping("/employee")
-    public List<Employee> findAllEmployee(){
-        return (List<Employee>) employeeRepository.findAll();
+    public List<EmployeeVO> findAllEmployee(){
+
+        List<Employee> data=(List<Employee>) employeeRepository.findAll();
+        List<EmployeeVO> result = new ArrayList<EmployeeVO>();
+        for(Employee item:data){
+            EmployeeVO newdata = new EmployeeVO();
+            newdata.setId(item.getId());
+            newdata.setName(item.getName());
+
+            Department eItem=item.getDepartment();
+            DepartmentVO departmentvo = new DepartmentVO();
+            departmentvo.setId(eItem.getId());
+            departmentvo.setName(eItem.getName());
+
+            newdata.setDepartment(departmentvo);
+            
+            result.add(newdata);
+        }
+        return result;
+        
     }
 
-    @GetMapping("/department/{id}")
-    public List<Employee> findDepartmentEmployee(@PathVariable("id") Integer departId){
-        return (List<Employee>) employeeRepository.findByDepart_id(departId);
-    }
+    @GetMapping("/employeedepartment/{id}")
+    public List<EmployeeVO> findDepartmentEmployee(@PathVariable("id") Integer departId){
+        List<Employee> data= (List<Employee>) employeeRepository.findByDepart_id(departId);
+        List<EmployeeVO> result = new ArrayList<EmployeeVO>();
+        for(Employee item:data){
+            EmployeeVO newdata = new EmployeeVO();
+            newdata.setId(item.getId());
+            newdata.setName(item.getName());
+
+            Department eItem=item.getDepartment();
+            DepartmentVO departmentvo = new DepartmentVO();
+            departmentvo.setId(eItem.getId());
+            departmentvo.setName(eItem.getName());
+
+            newdata.setDepartment(departmentvo);
+            
+            result.add(newdata);
+        }
+        return result;
+        }
+    
 
 
 
